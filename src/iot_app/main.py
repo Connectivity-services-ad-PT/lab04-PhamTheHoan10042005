@@ -37,6 +37,10 @@ def build_problem(*, status_code: int, title: str, detail: str, instance: Option
 def health() -> HealthResponse:
     return HealthResponse(status="ok", service=SERVICE_NAME, version=SERVICE_VERSION)
 
+@app.head("/health")
+def health_head():
+    return
+
 @app.post("/events", status_code=status.HTTP_201_CREATED)
 def mock_core_business_events(payload: Dict) -> Dict:
     return {"status": "event_forwarded"}
